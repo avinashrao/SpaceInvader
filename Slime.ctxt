@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=x\ y
+comment0.target=Slime(int,\ int)
+comment1.params=e
+comment1.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment2.params=g
+comment2.target=void\ paintComponent(java.awt.Graphics)
+comment3.params=
+comment3.target=int\ getXPos()
+comment4.params=
+comment4.target=int\ getYPos()
+comment5.params=k
+comment5.target=void\ setX(int)
+numComments=6
