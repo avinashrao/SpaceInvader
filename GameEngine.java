@@ -33,24 +33,6 @@ import java.util.Random;
 public class GameEngine
 {
     public static void main (String[] args){
-    
-        JFrame f= new JFrame("Welcome");
-        f.setSize(400,400);
-        
-        JPanel p=new JPanel();
-         p.setLayout(new BorderLayout());
-         
-         ImageIcon Ayy = new ImageIcon("6ca.jpg");
-         JLabel l=new JLabel();
-
-         p.add(l,BorderLayout.CENTER);
-         
-         p.setVisible(true);
-         f.add(p);
-         f.setVisible(true);
-        
-         
-         
         
         Board board = new Board();
         //hello

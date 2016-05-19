@@ -33,6 +33,7 @@ public class Board extends JComponent implements ActionListener
     SpaceShip ship;
     ArrayList<Alien> army;
     Timer tA;
+    JLabel score;
     //ImageIcon[][] alienArmy;
 
     public Board()
@@ -57,7 +58,7 @@ public class Board extends JComponent implements ActionListener
 
     }
 
-    public void createBoard()
+    public void createBoard() 
     {
         all.getContentPane().setBackground( Color.BLACK );
         a=0;
@@ -79,13 +80,15 @@ public class Board extends JComponent implements ActionListener
                         if(a%2==0){
                             all.add(new Rocket(ship.getXPos(),ship.getYPos()));
                             all.setVisible(true);
-                            a++;
+                     
 
                             break;
 
                         }
                     }}}
+
             public void keyTyped(KeyEvent e){}
+
             public void keyReleased(KeyEvent e){
                 switch (e.getKeyCode()){            
                     case KeyEvent.VK_LEFT:{
@@ -111,7 +114,12 @@ public class Board extends JComponent implements ActionListener
             all.add(army.get(i));
             all.setVisible(true);
         }
-
+        score=new JLabel();
+        score.setForeground(Color.GREEN);
+        score.setText("0");
+        
+        all.add(score);
+        all.setVisible(true);
         all.add(this);
         all.setVisible(true);// sets to visible
         all.addKeyListener(new MoveListener());
@@ -121,14 +129,13 @@ public class Board extends JComponent implements ActionListener
         tA.start();
 
     }
-    
 
     public void actionPerformed(ActionEvent e) {
         for(Alien a:army){
             a.move();
             a.repaint();
         }
-        a++;
+    
 
     }
 
