@@ -46,6 +46,7 @@ public class Board extends JComponent implements ActionListener
         //barage = new ArrayList<Rocket>();
         tA=new Timer(3000,this);
         AlienManager.initialize();
+        BlockManager.initialize();
         //board = new JPanel();
         //alien = new JLabel(alien1);
         //alien1 = new ImageIcon("Unknown.png");
@@ -66,6 +67,15 @@ public class Board extends JComponent implements ActionListener
         for(int i = 0; i<AlienManager.army.size(); i++) 
         {
             all.add(AlienManager.army.get(i));
+            all.setVisible(true);
+        }
+    }
+
+    public void drawBarriers()
+    {
+        for(int i = 0; i<BlockManager.barrier.size(); i++) 
+        {
+            all.add(BlockManager.barrier.get(i));
             all.setVisible(true);
         }
     }
@@ -123,9 +133,10 @@ public class Board extends JComponent implements ActionListener
         //                 army.add(new Alien(i,j));
         //             }
         //         }
-        
+
         this.drawAliens();
-        
+        this.drawBarriers();
+
         score=new JLabel();
         score.setForeground(Color.GREEN);
         score.setText("0");
@@ -164,7 +175,10 @@ public class Board extends JComponent implements ActionListener
         //                 if (barage.get(i).getYPos()<=0) barage.remove(i);
         //             }
         //         }
-
+        int x = (int) Math.random()*AlienManager.army.size();
+        all.add(new Slime(AlienManager.army.get(25).getXPos(),AlienManager.army.get(25).getYPos()));
+        all.setVisible(true);
+ 
         for(int j = 0; j<AlienManager.army.size(); j++){
             if (j>AlienManager.army.size()) break;
             Alien a = AlienManager.army.get(j);

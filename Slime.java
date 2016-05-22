@@ -1,4 +1,4 @@
- import java.awt.Rectangle;
+import java.awt.Rectangle;
 import javax.swing.JComponent;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -28,7 +28,7 @@ import java.util.Random;
 
 public class Slime extends JComponent implements ActionListener
 {
-    BufferedImage rocket;
+    BufferedImage slime;
     int posX;
     int posY;
     Timer t;
@@ -39,21 +39,43 @@ public class Slime extends JComponent implements ActionListener
         t=new Timer(10,this);
         t.start();
 
-         try {// allows you to test a block of code and then check for errors(as image imports usually throw and error)
-            rocket = ImageIO.read(new File("Unknown Copy.png"));// accesses image stored within the local folder
+        try {// allows you to test a block of code and then check for errors(as image imports usually throw and error)
+            slime = ImageIO.read(new File("Unknown Copy.png"));// accesses image stored within the local folder
         } catch (IOException e) {// allows you to catch a specific error without compile type errors. In the case of image imports 'IOException e'
         }
     }
-    
+
     public void actionPerformed(ActionEvent e){
         posY+=5;
         repaint();
         if(posY>500)t.stop();
+        this.batteringRam();
     }
 
-        public void paintComponent(Graphics g) {
+    public boolean batteringRam()
+    {
+        boolean hit = false;
+        for(int i = 0; i< BlockManager.barrier.size() ; i++)
+        {
+            if (this.getXPos()-BlockManager.barrier.get(i).getXPos()>=-4 && this.getXPos()-BlockManager.barrier.get(i).getXPos()<=0 && this.getYPos()-BlockManager.barrier.get(i).getYPos()>=-4 && this.getYPos()-BlockManager.barrier.get(i).getYPos()<=0) 
+            {
+                //i=i-1;
+                hit = true;
+                if (hit) 
+                {
+                    Board.all.remove(this);
+                    Board.all.remove(BlockManager.barrier.get(i));
+                    BlockManager.barrier.remove(i);
+                    t.stop();
+                }
+            }
+        }
+        return hit;
+    }
+
+    public void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(rocket, posX, posY, null);
+        g2.drawImage(slime, posX, posY, null);
     }
 
     public int getXPos()
