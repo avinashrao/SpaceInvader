@@ -1,4 +1,4 @@
- import java.awt.Rectangle;
+import java.awt.Rectangle;
 import javax.swing.JComponent;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -39,18 +39,41 @@ public class Rocket extends JComponent implements ActionListener
         t=new Timer(10,this);
         t.start();
 
-         try {// allows you to test a block of code and then check for errors(as image imports usually throw and error)
+        try {// allows you to test a block of code and then check for errors(as image imports usually throw and error)
             rocket = ImageIO.read(new File("Unknown-3.png"));// accesses image stored within the local folder
         } catch (IOException e) {// allows you to catch a specific error without compile type errors. In the case of image imports 'IOException e'
         }
     }
+
     public void actionPerformed(ActionEvent e){
         posY-=5;
         repaint();
         if(posY<-100)t.stop();
+        this.alienGoBoom();
     }
 
-        public void paintComponent(Graphics g) {
+    public boolean alienGoBoom()
+    {
+        boolean hit = false;
+        for(int i = 0; i< AlienManager.army.size() ; i++)
+        {
+            if (this.getXPos()-AlienManager.army.get(i).getXPos()<=5 && this.getXPos()-AlienManager.army.get(i).getXPos()>=0 && this.getYPos()-AlienManager.army.get(i).getYPos()<=5 && this.getYPos()-AlienManager.army.get(i).getYPos()>0) 
+            {
+                //i=i-1;
+                hit = true;
+                if (hit) 
+                {
+                    Board.all.remove(this);
+                    Board.all.remove(AlienManager.army.get(i));
+                    AlienManager.army.remove(i);
+                    t.stop();
+                }
+            }
+        }
+        return hit;
+    }
+
+    public void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(rocket, posX, posY, null);
     }

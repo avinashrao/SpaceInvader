@@ -28,10 +28,11 @@ import java.util.Random;
 public class Board extends JComponent implements ActionListener 
 {
     int a;
-    JFrame all;
+    public static JFrame all;
     Alien alien;
     SpaceShip ship;
-    ArrayList<Alien> army;
+    //ArrayList<Alien> army;
+    //ArrayList<Rocket> barage; 
     Timer tA;
     JLabel score;
     //ImageIcon[][] alienArmy;
@@ -41,8 +42,10 @@ public class Board extends JComponent implements ActionListener
         all = new JFrame();
         all.setSize(400,400);
         ship = new SpaceShip(200,350);
-        army = new ArrayList<Alien>();
-        tA=new Timer(1000,this);
+        //army = new ArrayList<Alien>();
+        //barage = new ArrayList<Rocket>();
+        tA=new Timer(3000,this);
+        AlienManager.initialize();
         //board = new JPanel();
         //alien = new JLabel(alien1);
         //alien1 = new ImageIcon("Unknown.png");
@@ -56,6 +59,15 @@ public class Board extends JComponent implements ActionListener
 
     public void paintComponent(Graphics g) {// method inherited from the JComponent project
 
+    }
+
+    public void drawAliens()
+    {
+        for(int i = 0; i<AlienManager.army.size(); i++) 
+        {
+            all.add(AlienManager.army.get(i));
+            all.setVisible(true);
+        }
     }
 
     public void createBoard() 
@@ -78,9 +90,11 @@ public class Board extends JComponent implements ActionListener
                     case KeyEvent.VK_SPACE:{ 
 
                         if(a%2==0){
-                            all.add(new Rocket(ship.getXPos(),ship.getYPos()));
+                            Rocket r = new Rocket(ship.getXPos(),ship.getYPos());
+                            all.add(r);
                             all.setVisible(true);
-                     
+
+                            //barage.add(r);
 
                             break;
 
@@ -102,22 +116,20 @@ public class Board extends JComponent implements ActionListener
                 }
             }
         }
-        for( int i = 30; i<350; i=i+20){
-            for (int j = 40;j<150; j=j+20) 
-            {
-                army.add(new Alien(i,j));
-            }
-        }
 
-        for(int i = 0; i<army.size(); i++) 
-        {
-            all.add(army.get(i));
-            all.setVisible(true);
-        }
+        //         for( int i = 30; i<350; i=i+20){
+        //             for (int j = 40;j<150; j=j+20) 
+        //             {
+        //                 army.add(new Alien(i,j));
+        //             }
+        //         }
+        
+        this.drawAliens();
+        
         score=new JLabel();
         score.setForeground(Color.GREEN);
         score.setText("0");
-        
+
         all.add(score);
         all.setVisible(true);
         all.add(this);
@@ -130,13 +142,48 @@ public class Board extends JComponent implements ActionListener
 
     }
 
+    //     public boolean alienGoBoom(Rocket r)
+    //     {
+    //         boolean hit = false;
+    //         for(int i = 0; i< army.size() ; i++)
+    //         {
+    //             if (r.getXPos()-army.get(i).getXPos()<=15 && r.getXPos()-army.get(i).getXPos()>=0 && r.getYPos()-army.get(i).getYPos()<=15 && r.getYPos()-army.get(i).getYPos()>0) {
+    //                 army.remove(i);
+    //                 all.remove(army.get(i));
+    //                 //i=i-1;
+    //                 hit = true;
+    //             }
+    //         }
+    //         return hit;
+    //     }
+
     public void actionPerformed(ActionEvent e) {
-        for(Alien a:army){
+        //         if (barage.size()>0)
+        //         {
+        //             for(int i = 0; i<barage.size(); i++){
+        //                 if (barage.get(i).getYPos()<=0) barage.remove(i);
+        //             }
+        //         }
+
+        for(int j = 0; j<AlienManager.army.size(); j++){
+            if (j>AlienManager.army.size()) break;
+            Alien a = AlienManager.army.get(j);
             a.move();
             a.repaint();
+            //             if (barage.size()>0)
+            //             {
+            //                 for (int i = 0; i<barage.size(); i++) 
+            //                 {
+            //                     boolean hit = this.alienGoBoom(barage.get(i));
+            //                     if (hit) 
+            //                     {
+            //                         j= j-1;
+            //                         all.remove(barage.get(i));
+            //                     }
+            //                 }
+            //             }
         }
-    
-
+        //System.out.println(AlienManager.army.size());
     }
 
 }
