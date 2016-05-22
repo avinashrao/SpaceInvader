@@ -35,6 +35,7 @@ public class Board extends JComponent implements ActionListener
     //ArrayList<Rocket> barage; 
     Timer tA;
     JLabel score;
+    int x;
     //ImageIcon[][] alienArmy;
 
     public Board()
@@ -175,8 +176,8 @@ public class Board extends JComponent implements ActionListener
         //                 if (barage.get(i).getYPos()<=0) barage.remove(i);
         //             }
         //         }
-        int x = (int) Math.random()*AlienManager.army.size();
-        all.add(new Slime(AlienManager.army.get(25).getXPos(),AlienManager.army.get(25).getYPos()));
+        x = (int) Math.random()*AlienManager.army.size();
+        all.add(new Slime(AlienManager.army.get(x).getXPos(),AlienManager.army.get(x).getYPos()));
         all.setVisible(true);
  
         for(int j = 0; j<AlienManager.army.size(); j++){

@@ -29,7 +29,6 @@ import java.util.Random;
 public class AlienManager
 {
     public static ArrayList<Alien> army = new ArrayList<Alien>();
-    public static ArrayList<Alien> deadAliens = new ArrayList<Alien>();
 
     public static void initialize()
     {
