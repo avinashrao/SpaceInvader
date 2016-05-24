@@ -27,7 +27,7 @@ import java.util.Random;
 
 public class GameEngine
 {
-    public static void main (String[] args){
+    public static void main (String[] args){// main method to initiate code. 
         /*ImageIcon ship=null;       
         try {// allows you to test a block of code and then check for errors(as image imports usually throw and error)
          ship =new ImageIcon(ImageIO.read(new File("Unknown-2.png")));
@@ -35,8 +35,8 @@ public class GameEngine
         }
         JOptionPane j= new JOptionPane("Welcome to Space Invaders", JOptionPane.INFORMATION_MESSAGE,JOptionPane.OK_CANCEL_OPTION,ship);
         j.createDialog("Welcome");*/
-        Board board = new Board(2000);
+        Board board = new Board(2000);// create new isntance of Board class which contains all the content for the Game.
 
-        board.createBoard();
+        board.createBoard();//call createBoard method Board object referenced by board. 
     }
 }
