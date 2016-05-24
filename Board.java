@@ -43,10 +43,12 @@ public class Board extends JComponent implements ActionListener
     static int p;
     static int l;
     int z;
+    static int ad;
     //ImageIcon[][] alienArmy;
 
     public Board(int x)
     {
+        ad=100;
         p= 0;
         l=3;
         z=x;
@@ -131,6 +133,7 @@ public class Board extends JComponent implements ActionListener
 
                     }
 
+
                     case KeyEvent.VK_SPACE:{ 
 
                         if(a%2==0){
@@ -156,8 +159,6 @@ public class Board extends JComponent implements ActionListener
         //         }
 
         this.drawAliens();
-        this.
-
         drawBarriers();
 
         score=new JLabel(" "+ p);
@@ -218,6 +219,18 @@ public class Board extends JComponent implements ActionListener
                    tA.stop();
         }
     }
+    public void nextLevel(){
+    AlienManager.initialize();
+    BlockManager.initialize();
+    this.drawAliens();
+    this.drawBarriers();
+    all.setVisible(true);
+    tA.stop();
+        tA=new Timer(z/2,this);
+        z=z/2;
+        ad=2*ad;
+        tA.start();
+    }
 
         //     public boolean alienGoBoom(Rocket r)
         //     {
@@ -244,6 +257,8 @@ public class Board extends JComponent implements ActionListener
         if(AlienManager.army.size()>0){ x= (int) r.nextInt(AlienManager.army.size());
         all.add(new Slime(AlienManager.army.get(x).getXPos(),AlienManager.army.get(x).getYPos()));
         all.setVisible(true);}
+        if(AlienManager.army.size()==0){nextLevel();
+        }
         for(int j = 0; j<AlienManager.army.size(); j++){
 
                 

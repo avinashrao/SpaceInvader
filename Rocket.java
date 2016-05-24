@@ -61,7 +61,7 @@ public class Rocket extends JComponent implements ActionListener
             {
                 //i=i-1;
                 hit = true;
-                Board.p+=100;
+                Board.p+=Board.ad;
                 
                 Board.score.setText(""+Board.p);
    
