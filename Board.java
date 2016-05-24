@@ -31,6 +31,9 @@ public class Board extends JComponent implements ActionListener
     public static JFrame all;
     Alien alien;
     SpaceShip ship;
+    SpaceShip life1;
+    SpaceShip life2;
+    SpaceShip life3;
     //ArrayList<Alien> army;
     //ArrayList<Rocket> barage; 
     Timer tA;
@@ -45,8 +48,12 @@ public class Board extends JComponent implements ActionListener
        p= 0;
         r= new Random();
         all = new JFrame();
+        all.setResizable(false);
         all.setSize(400,420);
         ship = new SpaceShip(200,350);
+        life1 = new SpaceShip(250,10);
+        life2 = new SpaceShip(300,10);
+        life3= new SpaceShip(350,10);
         //army = new ArrayList<Alien>();
         //barage = new ArrayList<Rocket>();
         tA=new Timer(500,this);
@@ -145,7 +152,8 @@ public class Board extends JComponent implements ActionListener
             //         }
 
             this.drawAliens();
-            this.
+            this.
+
             drawBarriers();
 
             score=new JLabel(" "+ p);
@@ -159,6 +167,12 @@ public class Board extends JComponent implements ActionListener
             all.addKeyListener(new MoveListener());
 
             all.add(ship);
+            all.setVisible(true);
+            all.add(life1);
+            all.setVisible(true);
+            all.add(life2);
+            all.setVisible(true);
+            all.add(life3);
             all.setVisible(true);
             tA.start();
 

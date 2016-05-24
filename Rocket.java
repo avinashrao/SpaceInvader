@@ -74,6 +74,21 @@ public class Rocket extends JComponent implements ActionListener
                 }
             }
         }
+                for(int i = 0; i< BlockManager.barrier.size() ; i++)
+        {
+            if (this.getXPos()-BlockManager.barrier.get(i).getXPos()>=-4 && this.getXPos()-BlockManager.barrier.get(i).getXPos()<=0 && this.getYPos()-BlockManager.barrier.get(i).getYPos()>=-4 && this.getYPos()-BlockManager.barrier.get(i).getYPos()<=0) 
+            {
+                //i=i-1;
+                hit = true;
+                if (hit) 
+                {
+                    Board.all.remove(this);
+                    Board.all.remove(BlockManager.barrier.get(i));
+                    BlockManager.barrier.remove(i);
+                    t.stop();
+                }
+            }
+        }
         return hit;
     }
 
