@@ -34,18 +34,22 @@ public class Board extends JComponent implements ActionListener
     //ArrayList<Alien> army;
     //ArrayList<Rocket> barage; 
     Timer tA;
-    JLabel score;
+    static JLabel score;
     int x;
+    Random r;
+     static int p;
     //ImageIcon[][] alienArmy;
 
     public Board()
     {
+       p= 0;
+        r= new Random();
         all = new JFrame();
-        all.setSize(400,400);
+        all.setSize(400,420);
         ship = new SpaceShip(200,350);
         //army = new ArrayList<Alien>();
         //barage = new ArrayList<Rocket>();
-        tA=new Timer(3000,this);
+        tA=new Timer(500,this);
         AlienManager.initialize();
         BlockManager.initialize();
         //board = new JPanel();
@@ -98,6 +102,24 @@ public class Board extends JComponent implements ActionListener
                         break;
 
                     }
+
+                }
+            }
+
+            public void keyTyped(KeyEvent e){}
+
+            public void keyReleased(KeyEvent e){
+                switch (e.getKeyCode()){            
+                    case KeyEvent.VK_LEFT:{
+                        ship.stop();
+                        break;
+                    }
+                    case KeyEvent.VK_RIGHT:{ 
+                        ship.stop();
+                        break;
+
+                    }
+
                     case KeyEvent.VK_SPACE:{ 
 
                         if(a%2==0){
@@ -110,81 +132,72 @@ public class Board extends JComponent implements ActionListener
                             break;
 
                         }
-                    }}}
-
-            public void keyTyped(KeyEvent e){}
-
-            public void keyReleased(KeyEvent e){
-                switch (e.getKeyCode()){            
-                    case KeyEvent.VK_LEFT:{
-                        ship.stop();
                     }
-                    case KeyEvent.VK_RIGHT:{ 
-                        ship.stop();
-
-                    }
-
                 }
             }
         }
 
-        //         for( int i = 30; i<350; i=i+20){
-        //             for (int j = 40;j<150; j=j+20) 
-        //             {
-        //                 army.add(new Alien(i,j));
+            //         for( int i = 30; i<350; i=i+20){
+            //             for (int j = 40;j<150; j=j+20) 
+            //             {
+            //                 army.add(new Alien(i,j));
+            //             }
+            //         }
+
+            this.drawAliens();
+            this.
+            drawBarriers();
+
+            score=new JLabel(" "+ p);
+            score.setForeground(Color.GREEN);
+        
+
+            all.add(score);
+            all.setVisible(true);
+            all.add(this);
+            all.setVisible(true);// sets to visible
+            all.addKeyListener(new MoveListener());
+
+            all.add(ship);
+            all.setVisible(true);
+            tA.start();
+
+        }
+
+        //     public boolean alienGoBoom(Rocket r)
+        //     {
+        //         boolean hit = false;
+        //         for(int i = 0; i< army.size() ; i++)
+        //         {
+        //             if (r.getXPos()-army.get(i).getXPos()<=15 && r.getXPos()-army.get(i).getXPos()>=0 && r.getYPos()-army.get(i).getYPos()<=15 && r.getYPos()-army.get(i).getYPos()>0) {
+        //                 army.remove(i);
+        //                 all.remove(army.get(i));
+        //                 //i=i-1;
+        //                 hit = true;
         //             }
         //         }
+        //         return hit;
+        //     }
 
-        this.drawAliens();
-        this.drawBarriers();
-
-        score=new JLabel();
-        score.setForeground(Color.GREEN);
-        score.setText("0");
-
-        all.add(score);
-        all.setVisible(true);
-        all.add(this);
-        all.setVisible(true);// sets to visible
-        all.addKeyListener(new MoveListener());
-
-        all.add(ship);
-        all.setVisible(true);
-        tA.start();
-
-    }
-
-    //     public boolean alienGoBoom(Rocket r)
-    //     {
-    //         boolean hit = false;
-    //         for(int i = 0; i< army.size() ; i++)
-    //         {
-    //             if (r.getXPos()-army.get(i).getXPos()<=15 && r.getXPos()-army.get(i).getXPos()>=0 && r.getYPos()-army.get(i).getYPos()<=15 && r.getYPos()-army.get(i).getYPos()>0) {
-    //                 army.remove(i);
-    //                 all.remove(army.get(i));
-    //                 //i=i-1;
-    //                 hit = true;
-    //             }
-    //         }
-    //         return hit;
-    //     }
-
-    public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent e) {
         //         if (barage.size()>0)
         //         {
         //             for(int i = 0; i<barage.size(); i++){
         //                 if (barage.get(i).getYPos()<=0) barage.remove(i);
         //             }
         //         }
-        x = (int) Math.random()*AlienManager.army.size();
+        x = (int) r.nextInt(AlienManager.army.size());
         all.add(new Slime(AlienManager.army.get(x).getXPos(),AlienManager.army.get(x).getYPos()));
         all.setVisible(true);
- 
+
+        
+
         for(int j = 0; j<AlienManager.army.size(); j++){
             if (j>AlienManager.army.size()) break;
             Alien a = AlienManager.army.get(j);
             a.move();
             a.repaint();
+            
             //             if (barage.size()>0)
             //             {
             //                 for (int i = 0; i<barage.size(); i++) 

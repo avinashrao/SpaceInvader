@@ -57,10 +57,14 @@ public class Rocket extends JComponent implements ActionListener
         boolean hit = false;
         for(int i = 0; i< AlienManager.army.size() ; i++)
         {
-            if (this.getXPos()-AlienManager.army.get(i).getXPos()<=5 && this.getXPos()-AlienManager.army.get(i).getXPos()>=0 && this.getYPos()-AlienManager.army.get(i).getYPos()<=5 && this.getYPos()-AlienManager.army.get(i).getYPos()>0) 
+            if (this.getXPos()-AlienManager.army.get(i).getXPos()<=7 && this.getXPos()-AlienManager.army.get(i).getXPos()>=-5 && this.getYPos()-AlienManager.army.get(i).getYPos()<=5 && this.getYPos()-AlienManager.army.get(i).getYPos()>0) 
             {
                 //i=i-1;
                 hit = true;
+                Board.p+=100;
+                
+                Board.score.setText(""+Board.p);
+   
                 if (hit) 
                 {
                     Board.all.remove(this);
