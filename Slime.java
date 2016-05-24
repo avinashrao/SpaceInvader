@@ -34,6 +34,7 @@ public class Slime extends JComponent implements ActionListener
     Timer t;
     public Slime(int x, int y)
     {
+        if(y>300)Board.nextlife();
         posX = x;
         posY = y;
         t=new Timer(10,this);
@@ -50,6 +51,7 @@ public class Slime extends JComponent implements ActionListener
         repaint();
         if(posY>500)t.stop();
         this.batteringRam();
+
     }
 
     public boolean batteringRam()
@@ -69,7 +71,17 @@ public class Slime extends JComponent implements ActionListener
                     t.stop();
                 }
             }
+
         }
+                boolean z=Board.checkShip(posX,posY);
+        if(z){
+            Board.all.remove(this);
+            Board.nextlife();
+            t.stop();
+            
+    }
+        
+
         return hit;
     }
 

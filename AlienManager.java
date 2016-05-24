@@ -32,7 +32,7 @@ public class AlienManager
 
     public static void initialize()
     {
-        for( int i = 30; i<350; i=i+20){
+        for( int i = 110; i<300; i=i+20){
             for (int j = 40;j<150; j=j+20) 
             {
                 army.add(new Alien(i,j));

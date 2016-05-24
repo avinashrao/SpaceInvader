@@ -52,8 +52,8 @@ public class Alien extends JComponent
     
         public void move(){
         z++;
-            if(z%10<5)posX-=5;
-            else{posX+=5;}
+            if(z%10<5)posX-=8;
+            else{posX+=8;}
             if(z%20==0)posY+=10;
         
 

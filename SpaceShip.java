@@ -89,6 +89,13 @@ public class SpaceShip extends JComponent implements ActionListener
         t.start();
     }
 
+    public void setXY(int k,int j)
+    {posX=k;
+        posY=j;
+
+      
+    }
+
     public void stop()
     {
         t.stop();

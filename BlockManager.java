@@ -14,7 +14,7 @@ public class BlockManager
             }
         }
 
-        for( int i = 160; i<240; i=i+4){
+        for( int i = 180; i<220; i=i+4){
             for (int j = 300;j<320; j=j+4) 
             {
                 barrier.add(new Block(i,j));

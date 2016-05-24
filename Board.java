@@ -30,22 +30,26 @@ public class Board extends JComponent implements ActionListener
     int a;
     public static JFrame all;
     Alien alien;
-    SpaceShip ship;
-    SpaceShip life1;
-    SpaceShip life2;
-    SpaceShip life3;
+    static SpaceShip ship;
+    static SpaceShip life1;
+    static SpaceShip life2;
+    static SpaceShip life3;
     //ArrayList<Alien> army;
     //ArrayList<Rocket> barage; 
-    Timer tA;
+    static Timer tA;
     static JLabel score;
     int x;
     Random r;
-     static int p;
+    static int p;
+    static int l;
+    int z;
     //ImageIcon[][] alienArmy;
 
-    public Board()
+    public Board(int x)
     {
-       p= 0;
+        p= 0;
+        l=3;
+        z=x;
         r= new Random();
         all = new JFrame();
         all.setResizable(false);
@@ -56,7 +60,7 @@ public class Board extends JComponent implements ActionListener
         life3= new SpaceShip(350,10);
         //army = new ArrayList<Alien>();
         //barage = new ArrayList<Rocket>();
-        tA=new Timer(500,this);
+        tA=new Timer(z,this);
         AlienManager.initialize();
         BlockManager.initialize();
         //board = new JPanel();
@@ -144,39 +148,76 @@ public class Board extends JComponent implements ActionListener
             }
         }
 
-            //         for( int i = 30; i<350; i=i+20){
-            //             for (int j = 40;j<150; j=j+20) 
-            //             {
-            //                 army.add(new Alien(i,j));
-            //             }
-            //         }
+        //         for( int i = 30; i<350; i=i+20){
+        //             for (int j = 40;j<150; j=j+20) 
+        //             {
+        //                 army.add(new Alien(i,j));
+        //             }
+        //         }
 
-            this.drawAliens();
-            this.
+        this.drawAliens();
+        this.
 
-            drawBarriers();
+        drawBarriers();
 
-            score=new JLabel(" "+ p);
-            score.setForeground(Color.GREEN);
-        
+        score=new JLabel(" "+ p);
+        score.setForeground(Color.GREEN);
 
-            all.add(score);
-            all.setVisible(true);
-            all.add(this);
-            all.setVisible(true);// sets to visible
-            all.addKeyListener(new MoveListener());
+        all.add(score);
+        all.setVisible(true);
+        all.add(this);
+        all.setVisible(true);// sets to visible
+        all.addKeyListener(new MoveListener());
 
-            all.add(ship);
-            all.setVisible(true);
-            all.add(life1);
-            all.setVisible(true);
-            all.add(life2);
-            all.setVisible(true);
-            all.add(life3);
-            all.setVisible(true);
-            tA.start();
+        all.add(ship);
+        all.setVisible(true);
+        all.add(life1);
+        all.setVisible(true);
+        all.add(life2);
+        all.setVisible(true);
+        all.add(life3);
+        all.setVisible(true);
+        tA.start();
 
+    }
+    
+    public static boolean checkShip(int x, int y)
+    {    boolean hit=false;   
+        if (ship.getXPos()-x>=-10 && ship.getXPos()-x<=7&& ship.getYPos()-y>=-4 && ship.getYPos()-y<=0) {
+          hit=true;
+                //i=i-1;
+
+                    
+                  
+                    
+                
+            }
+        return hit;
         }
+
+    public static void nextlife()
+    {
+        l--;
+        if(l==2){
+            all.remove(life1);
+                    all.setVisible(true);
+                  ship.setXY(200,350);
+        }
+                if(l==1){
+            all.remove(life2);
+                    all.setVisible(true);
+                    ship.setXY(200,350);
+        }
+                if(l==0){
+            all.remove(life3);
+                    all.setVisible(true);
+                   all.remove(ship);
+                   score.setText("GAME OVER!!! Your score is "+p);
+                   score.setFont(new Font("Serif", Font.PLAIN,20));
+                   all.setVisible(true);
+                   tA.stop();
+        }
+    }
 
         //     public boolean alienGoBoom(Rocket r)
         //     {
@@ -200,18 +241,18 @@ public class Board extends JComponent implements ActionListener
         //                 if (barage.get(i).getYPos()<=0) barage.remove(i);
         //             }
         //         }
-        x = (int) r.nextInt(AlienManager.army.size());
+        if(AlienManager.army.size()>0){ x= (int) r.nextInt(AlienManager.army.size());
         all.add(new Slime(AlienManager.army.get(x).getXPos(),AlienManager.army.get(x).getYPos()));
-        all.setVisible(true);
-
-        
-
+        all.setVisible(true);}
         for(int j = 0; j<AlienManager.army.size(); j++){
-            if (j>AlienManager.army.size()) break;
+
+                
+                
+                
             Alien a = AlienManager.army.get(j);
             a.move();
             a.repaint();
-            
+
             //             if (barage.size()>0)
             //             {
             //                 for (int i = 0; i<barage.size(); i++) 

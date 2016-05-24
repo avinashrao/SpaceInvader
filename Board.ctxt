@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=
-comment0.target=Board()
+comment0.params=x
+comment0.target=Board(int)
 comment1.params=g
 comment1.target=void\ paintComponent(java.awt.Graphics)
 comment2.params=
@@ -9,6 +9,10 @@ comment3.params=
 comment3.target=void\ drawBarriers()
 comment4.params=
 comment4.target=void\ createBoard()
-comment5.params=e
-comment5.target=void\ actionPerformed(java.awt.event.ActionEvent)
-numComments=6
+comment5.params=x\ y
+comment5.target=boolean\ checkShip(int,\ int)
+comment6.params=
+comment6.target=void\ nextlife()
+comment7.params=e
+comment7.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=8
