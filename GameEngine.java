@@ -35,7 +35,7 @@ public class GameEngine
         }
         JOptionPane j= new JOptionPane("Welcome to Space Invaders", JOptionPane.INFORMATION_MESSAGE,JOptionPane.OK_CANCEL_OPTION,ship);
         j.createDialog("Welcome");*/
-        Board board = new Board(2000);// create new isntance of Board class which contains all the content for the Game.
+        Board board = new Board(1000);// create new isntance of Board class which contains all the content for the Game.
 
         board.createBoard();//call createBoard method Board object referenced by board. 
     }
