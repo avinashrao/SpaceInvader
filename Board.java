@@ -129,9 +129,7 @@ public class Board extends JComponent implements ActionListener
 
                     }
 
-
                     case KeyEvent.VK_SPACE:{ // if even source is spacebar/
-
                         if(a%2==0){// performs action only when
                             Rocket r = new Rocket(ship.getXPos(),ship.getYPos());// construct new rocket from current location of ship.
                             all.add(r);// simply adding the aliens to the JFrame draws them according the the defined PaintComponent method in the class
@@ -177,86 +175,86 @@ public class Board extends JComponent implements ActionListener
         tA.start();
 
     }
-    
-    public static boolean checkShip(int x, int y)
-    {    boolean hit=false;   
-        if (ship.getXPos()-x>=-10 && ship.getXPos()-x<=7&& ship.getYPos()-y>=-4 && ship.getYPos()-y<=0) {
-          hit=true;
-            }
-        return hit;
+
+    public static boolean checkShip(int x, int y)//Method to check position of ship to a given location. 
+    {    boolean hit=false;   // boolean returned with true fals based on boolean operator below. 
+        if (ship.getXPos()-x>=-10 && ship.getXPos()-x<=7&& ship.getYPos()-y>=-4 && ship.getYPos()-y<=0) {// operator to check position of ship to distance within 4 vertically and 10 horizontally. 
+            hit=true;// if ship in range, return true for hit.
         }
+        return hit;// return hit.
+    }
 
     public static void nextlife()
     {
         l--;
         if(l==2){
             all.remove(life1);
-                    all.setVisible(true);
-                  ship.setXY(200,350);
+            all.setVisible(true);
+            ship.setXY(200,350);
         }
-                if(l==1){
+        if(l==1){
             all.remove(life2);
-                    all.setVisible(true);
-                    ship.setXY(200,350);
+            all.setVisible(true);
+            ship.setXY(200,350);
         }
-                if(l==0){
+        if(l==0){
             all.remove(life3);
-                    all.setVisible(true);
-                   all.remove(ship);
-                   score.setText("GAME OVER!!! Your score is "+p);
-                   score.setFont(new Font("Serif", Font.PLAIN,20));
-                   all.setVisible(true);
-                   tA.stop();
+            all.setVisible(true);
+            all.remove(ship);
+            score.setText("GAME OVER!!! Your score is "+p);
+            score.setFont(new Font("Serif", Font.PLAIN,20));
+            all.setVisible(true);
+            tA.stop();
         }
     }
+
     public void nextLevel(){
-    AlienManager.initialize();
-    BlockManager.initialize();
-    this.drawAliens();
-    this.drawBarriers();
-    all.setVisible(true);
-    tA.stop();
+        AlienManager.initialize();
+        BlockManager.initialize();
+        this.drawAliens();
+        this.drawBarriers();
+        all.setVisible(true);
+        tA.stop();
         tA=new Timer(z/2,this);
         z=z/2;
         ad=2*ad;
         tA.start();
     }
 
-        //     public boolean alienGoBoom(Rocket r)
-        //     {
-        //         boolean hit = false;
-        //         for(int i = 0; i< army.size() ; i++)
-        //         {
-        //             if (r.getXPos()-army.get(i).getXPos()<=15 && r.getXPos()-army.get(i).getXPos()>=0 && r.getYPos()-army.get(i).getYPos()<=15 && r.getYPos()-army.get(i).getYPos()>0) {
-        //                 army.remove(i);
-        //                 all.remove(army.get(i));
-        //                 //i=i-1;
-        //                 hit = true;
-        //             }
-        //         }
-        //         return hit;
-        //     }
+    //     public boolean alienGoBoom(Rocket r)
+    //     {
+    //         boolean hit = false;
+    //         for(int i = 0; i< army.size() ; i++)
+    //         {
+    //             if (r.getXPos()-army.get(i).getXPos()<=15 && r.getXPos()-army.get(i).getXPos()>=0 && r.getYPos()-army.get(i).getYPos()<=15 && r.getYPos()-army.get(i).getYPos()>0) {
+    //                 army.remove(i);
+    //                 all.remove(army.get(i));
+    //                 //i=i-1;
+    //                 hit = true;
+    //             }
+    //         }
+    //         return hit;
+    //     }
 
-        public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) {
         //         if (barage.size()>0)
         //         {
         //             for(int i = 0; i<barage.size(); i++){
         //                 if (barage.get(i).getYPos()<=0) barage.remove(i);
         //             }
         //         }
-        if(AlienManager.army.size()>0){ x= (int) r.nextInt(AlienManager.army.size());
-        all.add(new Slime(AlienManager.army.get(x).getXPos(),AlienManager.army.get(x).getYPos()));
-        all.setVisible(true);}
-        if(AlienManager.army.size()==0){nextLevel();
+        if(AlienManager.army.size()>0){ //if statement meant to be a false safe, so program doesn't crash if no aliens remain in the Arraylist. 
+            x= (int) r.nextInt(AlienManager.army.size());// Random number generator to randomly select aliens. nextInt method selects double value between 1 and 0. It is then multiplied by the numeber of elements in the arraylist to select a random number within the bounds of largest index. 
+            all.add(new Slime(AlienManager.army.get(x).getXPos(),AlienManager.army.get(x).getYPos()));// constructs a slime (alien rocket) at the x,y cordinates of the randomly selected alien. Then in a single line, adds the slime to the frame. 
+            all.setVisible(true);
         }
-        for(int j = 0; j<AlienManager.army.size(); j++){
+        if(AlienManager.army.size()==0){nextLevel(); // The program continues onto the next level once the size of the alien's ArrayList is 0. 
+        }
+        for(int j = 0; j<AlienManager.army.size(); j++){// goes through all the aliens. 
 
-                
-                
-                
-            Alien a = AlienManager.army.get(j);
-            a.move();
-            a.repaint();
+            Alien a = AlienManager.army.get(j);//holder variable for current element were j is it index is assigned to variable a of type Alien.
+            a.move();//move method invoked on alien.
+            a.repaint();// repainted. 
 
             //             if (barage.size()>0)
             //             {
@@ -271,7 +269,5 @@ public class Board extends JComponent implements ActionListener
             //                 }
             //             }
         }
-        //System.out.println(AlienManager.army.size());
     }
-
 }

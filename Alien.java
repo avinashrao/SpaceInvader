@@ -26,9 +26,9 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Alien extends JComponent 
+public class Alien extends JComponent
 {
-    BufferedImage alien;
+    BufferedImage alien;// construct instance field variables.
     int posX;
     int posY;
     Timer t;

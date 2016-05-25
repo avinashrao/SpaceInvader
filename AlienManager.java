@@ -26,16 +26,16 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class AlienManager
+public class AlienManager// holder class for static ArrayList of aliens. Necessary to increase efficiency of codes and to avoid constant transfer and exchange of this array between Alien, Rocket, and Board classes.
 {
-    public static ArrayList<Alien> army = new ArrayList<Alien>();
+    public static ArrayList<Alien> army = new ArrayList<Alien>(); // initialize Arraylist of elements of type Alien as public static (thus can be accessed and mutated by multiple related classes.)
 
-    public static void initialize()
+    public static void initialize()// initialize method when classed will populate araylist with aliens. 
     {
-        for( int i = 110; i<300; i=i+20){
-            for (int j = 40;j<150; j=j+20) 
+        for( int i = 110; i<300; i=i+20){// for loop corresponding range of x values for aliens with step of +20 for spacing. 
+            for (int j = 40;j<150; j=j+20) // inner for loop corresponding range of y values for aliens with step of +20 for spacing. 
             {
-                army.add(new Alien(i,j));
+                army.add(new Alien(i,j));// construct and add new alien objects to ArrayList. 
             }
         }
     }

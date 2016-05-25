@@ -1,7 +1,7 @@
 
 import java.util.ArrayList;
 
-public class BlockManager
+public class BlockManager// comment code for BlcokManager class is identical to that found in AlienManager. 
 {
     public static ArrayList<Block> barrier = new ArrayList<Block>();
 

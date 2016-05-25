@@ -26,7 +26,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Slime extends JComponent implements ActionListener
+public class Slime extends JComponent implements ActionListener// all comment code for slime class is identical to that found in the Rocket class. 
 {
     BufferedImage slime;
     int posX;
