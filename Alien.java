@@ -45,21 +45,21 @@ public class Alien extends JComponent
         }
     }
 
-        public void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(alien, posX, posY, null);
+        public void paintComponent(Graphics g) {//paintcomponent method invoked when Jcompent draw on the frame
+        Graphics2D g2 = (Graphics2D) g;//casts the graphics object referenced by g to a graphics2D reference,  g2
+        g2.drawImage(alien, posX, posY, null);//draws the image of the alien image to the screen using the draw image mutator method
     }
     
-        public void move(){
-        z++;
-            if(z%10<5)posX-=8;
+        public void move(){//invoked regularly to change the position of the alien
+        z++;//increments the value of primitive variable z
+            if(z%10<5)posX-=8;//changes the value of the instance field primitive variable posX
             else{posX+=8;}
             if(z%20==0)posY+=10;
         
 
     }
 
-    public int getXPos()
+    public int getXPos()//accessor method for the alien class
     {
         return posX;
     }
@@ -69,7 +69,7 @@ public class Alien extends JComponent
         return posY;
     }
 
-    public void setX(int k)
+    public void setX(int k)//mutator method for the alien class
     {
         posX = k;
     }

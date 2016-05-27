@@ -54,7 +54,7 @@ public class Rocket extends JComponent implements ActionListener
 
     public boolean alienGoBoom()
     {
-        boolean hit = false;// boolean to trak hit on alien. 
+        boolean hit = false;// boolean to track hit on alien. 
         for(int i = 0; i< AlienManager.army.size() ; i++)// for loop to check every element of the alien ArrayList.
         {
             if (this.getXPos()-AlienManager.army.get(i).getXPos()<=5 && this.getXPos()-AlienManager.army.get(i).getXPos()>=-5 && this.getYPos()-AlienManager.army.get(i).getYPos()<=5 && this.getYPos()-AlienManager.army.get(i).getYPos()>0) // Boolean opperator to check proximity of rocket 5 units horizontally and vertically in relation to current alien. 

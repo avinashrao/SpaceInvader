@@ -26,7 +26,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class SpaceShip extends JComponent implements ActionListener
+public class SpaceShip extends JComponent implements ActionListener//look in alien class for additional comment code
 {
     BufferedImage ship;
     int posX;
@@ -34,9 +34,9 @@ public class SpaceShip extends JComponent implements ActionListener
     boolean left;
     Timer t;
     int z;
-    public SpaceShip(int x, int y)
+    public SpaceShip(int x, int y)//constructor
     {
-       t=new Timer(10,this);
+       t=new Timer(10,this);//creates a timer object with  parameters of this object and a 10ms delay
         posX = x;
         posY = y;
         left=true;
@@ -63,9 +63,9 @@ public class SpaceShip extends JComponent implements ActionListener
         return posY;
     }
 
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e){//invoked every time a timer causes a event on this class
         if(left==true){
-            if(posX>5)posX = posX-z;
+            if(posX>5)posX = posX-z;//changes the value of the primivite instance field posX
             repaint();}
         if(left==false){
             if(posX<375)posX = posX+z;
@@ -74,7 +74,7 @@ public class SpaceShip extends JComponent implements ActionListener
 
     }
 
-    public void left(int k)
+    public void left(int k)//mutator method of the SpaceShip class
     {
         z=k;
         left=true;
@@ -96,7 +96,7 @@ public class SpaceShip extends JComponent implements ActionListener
       
     }
 
-    public void stop()
+    public void stop()//stops the timer for this object by invoking the stop mutator method on the timer referenced by t
     {
         t.stop();
     }

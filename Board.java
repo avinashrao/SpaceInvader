@@ -34,8 +34,6 @@ public class Board extends JComponent implements ActionListener
     static SpaceShip life1;
     static SpaceShip life2;
     static SpaceShip life3;
-    //ArrayList<Alien> army;
-    //ArrayList<Rocket> barage; 
     static Timer tA;
     static JLabel score;
     int x;
@@ -45,7 +43,6 @@ public class Board extends JComponent implements ActionListener
     int z;
     static int ad;
     static boolean running;
-    //ImageIcon[][] alienArmy;
 
     public Board(int x)
     {
@@ -62,20 +59,10 @@ public class Board extends JComponent implements ActionListener
         life1 = new SpaceShip(250,10);
         life2 = new SpaceShip(300,10);
         life3= new SpaceShip(350,10);
-        //army = new ArrayList<Alien>();
-        //barage = new ArrayList<Rocket>();
+
         tA=new Timer(z,this);
         AlienManager.initialize();// call static variable from AlienManager class to initialize array of Aliens.
         BlockManager.initialize();// call static variable from BlockManager class to initialize array of Blocks.
-        //board = new JPanel();
-        //alien = new JLabel(alien1);
-        //alien1 = new ImageIcon("Unknown.png");
-        //ImageIcon = new ImageIcon[5][11];
-        //         try {// allows you to test a block of code and then check for errors(as image imports usually throw and error)
-        //             alien = ImageIO.read(new File("Unknown.png"));// accesses image stored within the local folder
-        //         } catch (IOException e) {// allows you to catch a specific error without compile type errors. In the case of image imports 'IOException e'
-        //         }
-
     }
 
     public void drawAliens() // This class is put in charge of Drawing and managing the drawing of aliens as it contains the JFrame. 
@@ -139,8 +126,7 @@ public class Board extends JComponent implements ActionListener
                                 all.add(r);// simply adding the aliens to the JFrame draws them according the the defined PaintComponent method in the class
                                 all.setVisible(true);// Set frame to visible using setVisible method on frame object to be able to view the newly drawn JComponenet.
 
-                                //barage.add(r);
-
+                                
                                 break;
 
                             }
@@ -150,12 +136,7 @@ public class Board extends JComponent implements ActionListener
             }
         }
 
-        //         for( int i = 30; i<350; i=i+20){
-        //             for (int j = 40;j<150; j=j+20) 
-        //             {
-        //                 army.add(new Alien(i,j));
-        //             }
-        //         }
+
 
         this.drawAliens();//call method in this class to draw all aliens. More comment code of functionality in method itself.
         drawBarriers();//call method in this class to draw all aliens. More comment code of functionality in method itself.
@@ -189,11 +170,11 @@ public class Board extends JComponent implements ActionListener
         return hit;// return hit.
     }
 
-    public static void nextlife()
+    public static void nextlife()//invoked when hit detected by slime object
     {
-        l--;
+        l--;//reduces the value of the primative int l which represents number of lives
         if(l==2){
-            all.remove(life1);
+            all.remove(life1);//removes the spaceship object life1 from the jframe, life 1 is a life indicator
             all.setVisible(true);
             ship.setXY(200,350);
         }
@@ -206,49 +187,30 @@ public class Board extends JComponent implements ActionListener
             all.remove(life3);
             all.setVisible(true);
             all.remove(ship);
-            score.setText("GAME OVER!!! Your score is "+p);
-            score.setFont(new Font("Serif", Font.PLAIN,20));
+            score.setText("GAME OVER!!! Your score is "+p);//mutates the jlabel object to set the test displayed
+            score.setFont(new Font("Serif", Font.PLAIN,20));//mutates the jlabel object to set the font
             all.setVisible(true);
             running=false;
             tA.stop();
         }
     }
 
-    public void nextLevel(){
-        AlienManager.initialize();
+    public void nextLevel(){//invoked when the size of the array of aliens is zero
+        AlienManager.initialize();//invokes the inilialize mutator method on the alienmanager object
         BlockManager.initialize();
-        this.drawAliens();
+        this.drawAliens();//invokes the draw aliens mutator method
         this.drawBarriers();
         all.setVisible(true);
         tA.stop();
-        tA=new Timer(z/2,this);
-        z=z/2;
+        tA=new Timer(z/2,this);//creates a new timer object with a delay of half the value of primitive variable z
+        z=z/2;//sets the value of the primitive variable z
         ad=2*ad;
-        tA.start();
+        tA.start();//invokes the start mutator method on the Timer object referenced by tA
     }
 
-    //     public boolean alienGoBoom(Rocket r)
-    //     {
-    //         boolean hit = false;
-    //         for(int i = 0; i< army.size() ; i++)
-    //         {
-    //             if (r.getXPos()-army.get(i).getXPos()<=15 && r.getXPos()-army.get(i).getXPos()>=0 && r.getYPos()-army.get(i).getYPos()<=15 && r.getYPos()-army.get(i).getYPos()>0) {
-    //                 army.remove(i);
-    //                 all.remove(army.get(i));
-    //                 //i=i-1;
-    //                 hit = true;
-    //             }
-    //         }
-    //         return hit;
-    //     }
 
     public void actionPerformed(ActionEvent e) {
-        //         if (barage.size()>0)
-        //         {
-        //             for(int i = 0; i<barage.size(); i++){
-        //                 if (barage.get(i).getYPos()<=0) barage.remove(i);
-        //             }
-        //         }
+
         if(AlienManager.army.size()>0){ //if statement meant to be a false safe, so program doesn't crash if no aliens remain in the Arraylist. 
             x= (int) r.nextInt(AlienManager.army.size());// Random number generator to randomly select aliens. nextInt method selects double value between 1 and 0. It is then multiplied by the numeber of elements in the arraylist to select a random number within the bounds of largest index. 
             all.add(new Slime(AlienManager.army.get(x).getXPos(),AlienManager.army.get(x).getYPos()));// constructs a slime (alien rocket) at the x,y cordinates of the randomly selected alien. Then in a single line, adds the slime to the frame. 
@@ -262,18 +224,6 @@ public class Board extends JComponent implements ActionListener
             a.move();//move method invoked on alien.
             a.repaint();// repainted. 
 
-            //             if (barage.size()>0)
-            //             {
-            //                 for (int i = 0; i<barage.size(); i++) 
-            //                 {
-            //                     boolean hit = this.alienGoBoom(barage.get(i));
-            //                     if (hit) 
-            //                     {
-            //                         j= j-1;
-            //                         all.remove(barage.get(i));
-            //                     }
-            //                 }
-            //             }
         }
     }
 }

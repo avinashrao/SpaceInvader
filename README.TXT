@@ -1,12 +1,6 @@
-------------------------------------------------------------------------
-This is the project README file. Here, you should describe your project.
-Tell the reader (someone who does not know anything about this project)
-all he/she needs to know. The comments should usually include at least:
-------------------------------------------------------------------------
-
-PROJECT TITLE:
-PURPOSE OF PROJECT:
-VERSION or DATE:
-HOW TO START THIS PROJECT:
+PROJECT TITLE: Space Invaders
+HOW TO START THIS PROJECT: Use main method in 
 AUTHORS:
-USER INSTRUCTIONS:
+Avinash Rao-- Did movement, key-listeners, scoring, game sprites, and game structure 
+Anish Seshadri -- did visual structuring, hit detection, and data structuring 
+USER INSTRUCTIONS: Tap Spacebar to shoot rocket, use arrow keys to move ship

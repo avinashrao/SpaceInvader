@@ -26,7 +26,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Block extends JComponent 
+public class Block extends JComponent //see alien class for comment code
 {
     BufferedImage block;
     int posX;
