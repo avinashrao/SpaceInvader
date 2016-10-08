@@ -28,7 +28,15 @@ import java.util.Random;
 public class GameEngine
 {
     public static void main (String[] args){// main method to initiate code. 
-        Board board = new Board(1000);// create new isntance of Board class which contains all the content for the Game.
+        int choose=Integer.parseInt(JOptionPane.showInputDialog("Would you like to resume your game from the file (press 1) or start a new game (press 2)?"));
+       System.out.println("\fPress S to save, space to shoot, and left and right to move.");
+        Board board;
+        if(choose==1){
+        board = new Board(1000);// create new isntance of Board class which contains all the content for the Game.
+    }
+        else{
+        board = new Board(1000);// create new isntance of Board class which contains all the content for the Game.
+    }
 
         board.createBoard();//call createBoard method Board object referenced by board. 
     }

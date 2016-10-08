@@ -101,6 +101,30 @@ public class Board extends JComponent implements ActionListener
                             break;
 
                         }
+                        case KeyEvent.VK_S:{ // When event source is right arrow button...
+                            all.remove(life1);
+                            all.remove(life2);
+                            all.remove(life3);
+                            for(int i = 0; i<AlienManager.army.size(); i++) //using the static array of aliens in the AlienManager class, this for loop draws all the aliens. 
+                            {
+                                all.remove(AlienManager.army.get(i));// simply adding the aliens to the JFrame draws them according the the defined PaintComponent method in the class
+                                all.setVisible(true);// Set frame to visible using setVisible method on frame object to be able to view the newly drawn JComponenet. 
+                            }
+                            for(int i = 0; i<BlockManager.barrier.size(); i++) 
+                            {
+                                all.remove(BlockManager.barrier.get(i));// simply adding the aliens to the JFrame draws them according the the defined PaintComponent method in the class
+                                all.setVisible(true);// Set frame to visible using setVisible method on frame object to be able to view the newly drawn JComponenet.
+                            }
+                            all.setVisible(true);
+                            all.remove(ship);
+                            score.setText("Game Saved to file, close the window.");//mutates the jlabel object to set the test displayed
+                            score.setFont(new Font("Serif", Font.PLAIN,20));//mutates the jlabel object to set the font
+                            all.setVisible(true);
+                            running=false;
+                            tA.stop();
+                            break;
+
+                        }
 
                     }
                 }}
@@ -126,17 +150,13 @@ public class Board extends JComponent implements ActionListener
                                 all.add(r);// simply adding the aliens to the JFrame draws them according the the defined PaintComponent method in the class
                                 all.setVisible(true);// Set frame to visible using setVisible method on frame object to be able to view the newly drawn JComponenet.
 
-                                
                                 break;
-
                             }
                         }
                     }
                 }
             }
         }
-
-
 
         this.drawAliens();//call method in this class to draw all aliens. More comment code of functionality in method itself.
         drawBarriers();//call method in this class to draw all aliens. More comment code of functionality in method itself.
@@ -208,9 +228,7 @@ public class Board extends JComponent implements ActionListener
         tA.start();//invokes the start mutator method on the Timer object referenced by tA
     }
 
-
     public void actionPerformed(ActionEvent e) {
-
         if(AlienManager.army.size()>0){ //if statement meant to be a false safe, so program doesn't crash if no aliens remain in the Arraylist. 
             x= (int) r.nextInt(AlienManager.army.size());// Random number generator to randomly select aliens. nextInt method selects double value between 1 and 0. It is then multiplied by the numeber of elements in the arraylist to select a random number within the bounds of largest index. 
             all.add(new Slime(AlienManager.army.get(x).getXPos(),AlienManager.army.get(x).getYPos()));// constructs a slime (alien rocket) at the x,y cordinates of the randomly selected alien. Then in a single line, adds the slime to the frame. 
