@@ -73,4 +73,8 @@ public class Alien extends JComponent
     {
         posX = k;
     }
+    public String toString()//mutator method for the alien class
+    {
+        return posX+","+posY;
+    }
 }
