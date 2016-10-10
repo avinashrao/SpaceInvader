@@ -16,7 +16,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.*;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 import javax.swing.Timer;
@@ -24,7 +24,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Random;
-
+import com.opencsv.*;
 public class Board extends JComponent implements ActionListener 
 {
     int a;// Initialize instance field variables. 
@@ -102,6 +102,39 @@ public class Board extends JComponent implements ActionListener
 
                         }
                         case KeyEvent.VK_S:{ // When event source is right arrow button...
+                            try{
+                                CSVWriter writer = new CSVWriter(new FileWriter("save.txt"), ',', 
+                                        CSVWriter.NO_QUOTE_CHARACTER, 
+                                        CSVWriter.NO_ESCAPE_CHARACTER, 
+                                        System.getProperty("line.separator"));
+                                // feed in your array (or convert your data to an array)
+                                String[]alienX=new String[AlienManager.army.size()];
+                                String[]alienY=new String[AlienManager.army.size()];
+                                for(int i = 0; i<AlienManager.army.size(); i++) //using the static array of aliens in the AlienManager class, this for loop draws all the aliens. 
+                                {
+                                    
+                                   alienX[i]=Integer.toString(AlienManager.army.get(i).getXPos());// simply adding the aliens to the JFrame draws them according the the defined PaintComponent method in the class
+                                   alienY[i]=Integer.toString(AlienManager.army.get(i).getYPos());
+                                  
+                                }
+                                String[]blockX=new String[BlockManager.barrier.size()];
+                                String[]blockY=new String[BlockManager.barrier.size()];
+                                for(int i = 0; i<BlockManager.barrier.size(); i++) 
+                                {
+                                blockX[i]=Integer.toString(BlockManager.barrier.get(i).getXPos());// simply adding the aliens to the JFrame draws them according the the defined PaintComponent method in the class
+                                   blockY[i]=Integer.toString(BlockManager.barrier.get(i).getYPos());
+                            }
+                                  writer.writeNext(alienX);
+                                   writer.writeNext(alienY);
+                                     writer.writeNext(blockX);
+                                   writer.writeNext(blockY);
+                                   writer.writeNext(new String[]{Integer.toString(ad),Integer.toString(l),Integer.toString(p),Integer.toString(ship.getXPos()),Integer.toString(ship.getYPos())});
+
+                                writer.close();
+
+                            }catch(FileNotFoundException fnf){
+                            }catch(IOException io){
+                            }
                             all.remove(life1);
                             all.remove(life2);
                             all.remove(life3);
