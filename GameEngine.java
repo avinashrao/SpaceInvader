@@ -32,7 +32,7 @@ public class GameEngine
        System.out.println("\fPress S to save, space to shoot, and left and right to move.");
         Board board;
         if(choose==1){
-        board = new Board(1000);// create new isntance of Board class which contains all the content for the Game.
+        board = new Board("save.txt");// create new isntance of Board class which contains all the content for the Game.
     }
         else{
         board = new Board(1000);// create new isntance of Board class which contains all the content for the Game.

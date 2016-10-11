@@ -39,5 +39,10 @@ public class AlienManager// holder class for static ArrayList of aliens. Necessa
             }
         }
     }
+    public static void initialize(ArrayList<Alien> a)// initialize method when classed will populate araylist with aliens. 
+    {
+        army=a;
+    }
+    
     
 }

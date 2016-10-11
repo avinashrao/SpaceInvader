@@ -28,4 +28,9 @@ public class BlockManager// comment code for BlcokManager class is identical to 
             }
         }
     }
+        public static void initialize(ArrayList<Block> b)// initialize method when classed will populate araylist with aliens. 
+    {
+        barrier=b;
+    }
+    
 }

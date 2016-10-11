@@ -65,6 +65,53 @@ public class Board extends JComponent implements ActionListener
         BlockManager.initialize();// call static variable from BlockManager class to initialize array of Blocks.
     }
 
+    public Board(String filename)
+    {
+        try{String[] line1;
+            String[] line2;
+            String[] line3;
+            String[] line4;
+            String[] line5;
+            ArrayList<Alien> army=new ArrayList<Alien>();
+            ArrayList<Block> barrier=new ArrayList<Block>();
+            CSVReader reader=new CSVReader(new FileReader(filename));
+            line1 = reader.readNext();
+            line2 = reader.readNext();
+            line3 = reader.readNext();
+            line4 = reader.readNext();
+            line5 = reader.readNext();
+            for(int i=0;i<line1.length;i++){
+                army.add(new Alien(Integer.parseInt(line1[i]),Integer.parseInt(line2[i])));  
+            }
+
+            for(int i=0;i<line3.length;i++){
+                barrier.add(new Block(Integer.parseInt(line3[i]),Integer.parseInt(line4[i])));  
+            }
+
+            running=true;
+            r= new Random();
+            all = new JFrame();
+            all.setResizable(false);
+            all.setSize(400,420);
+            z=Integer.parseInt(line5[0]);
+            ad=Integer.parseInt(line5[1]);
+            l=Integer.parseInt(line5[2]);
+            p=Integer.parseInt(line5[3]);
+
+            Integer.parseInt(line5[5]);
+            ship = new SpaceShip(Integer.parseInt(line5[4]),Integer.parseInt(line5[5]));
+            if(l==3)life1= new SpaceShip(250,10);
+            if(l>1)life2 = new SpaceShip(300,10);
+            if(l>0)life3= new SpaceShip(350,10);
+            tA=new Timer(z,this);
+            AlienManager.initialize(army);// call static variable from AlienManager class to initialize array of Aliens.
+            BlockManager.initialize(barrier);// call static variable from BlockManager class to initialize array of Blocks.
+        }catch(FileNotFoundException fnf){
+        }catch(IOException e){
+        }
+
+
+    }
     public void drawAliens() // This class is put in charge of Drawing and managing the drawing of aliens as it contains the JFrame. 
     {
         for(int i = 0; i<AlienManager.army.size(); i++) //using the static array of aliens in the AlienManager class, this for loop draws all the aliens. 
@@ -112,23 +159,23 @@ public class Board extends JComponent implements ActionListener
                                 String[]alienY=new String[AlienManager.army.size()];
                                 for(int i = 0; i<AlienManager.army.size(); i++) //using the static array of aliens in the AlienManager class, this for loop draws all the aliens. 
                                 {
-                                    
-                                   alienX[i]=Integer.toString(AlienManager.army.get(i).getXPos());// simply adding the aliens to the JFrame draws them according the the defined PaintComponent method in the class
-                                   alienY[i]=Integer.toString(AlienManager.army.get(i).getYPos());
-                                  
+
+                                    alienX[i]=Integer.toString(AlienManager.army.get(i).getXPos());// simply adding the aliens to the JFrame draws them according the the defined PaintComponent method in the class
+                                    alienY[i]=Integer.toString(AlienManager.army.get(i).getYPos());
+
                                 }
                                 String[]blockX=new String[BlockManager.barrier.size()];
                                 String[]blockY=new String[BlockManager.barrier.size()];
                                 for(int i = 0; i<BlockManager.barrier.size(); i++) 
                                 {
-                                blockX[i]=Integer.toString(BlockManager.barrier.get(i).getXPos());// simply adding the aliens to the JFrame draws them according the the defined PaintComponent method in the class
-                                   blockY[i]=Integer.toString(BlockManager.barrier.get(i).getYPos());
-                            }
-                                  writer.writeNext(alienX);
-                                   writer.writeNext(alienY);
-                                     writer.writeNext(blockX);
-                                   writer.writeNext(blockY);
-                                   writer.writeNext(new String[]{Integer.toString(ad),Integer.toString(l),Integer.toString(p),Integer.toString(ship.getXPos()),Integer.toString(ship.getYPos())});
+                                    blockX[i]=Integer.toString(BlockManager.barrier.get(i).getXPos());// simply adding the aliens to the JFrame draws them according the the defined PaintComponent method in the class
+                                    blockY[i]=Integer.toString(BlockManager.barrier.get(i).getYPos());
+                                }
+                                writer.writeNext(alienX);
+                                writer.writeNext(alienY);
+                                writer.writeNext(blockX);
+                                writer.writeNext(blockY);
+                                writer.writeNext(new String[]{Integer.toString(z),Integer.toString(ad),Integer.toString(l),Integer.toString(p),Integer.toString(ship.getXPos()),Integer.toString(ship.getYPos())});
 
                                 writer.close();
 
@@ -205,11 +252,11 @@ public class Board extends JComponent implements ActionListener
 
         all.add(ship);
         all.setVisible(true);
-        all.add(life1);
+        if(l>0)all.add(life3);
         all.setVisible(true);
-        all.add(life2);
+        if(l>1)all.add(life2);
         all.setVisible(true);
-        all.add(life3);
+        if(l==3)all.add(life1);
         all.setVisible(true);
         tA.start();
 
