@@ -29,7 +29,7 @@ import java.util.Random;
 public class Alien extends JComponent
 {
     BufferedImage alien;// construct instance field variables.
-    int posX;
+    int posX;//
     int posY;
     Timer t;
     int z;

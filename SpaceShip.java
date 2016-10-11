@@ -29,7 +29,7 @@ import java.util.Random;
 public class SpaceShip extends JComponent implements ActionListener//look in alien class for additional comment code
 {
     BufferedImage ship;
-    int posX;
+    int posX;//
     int posY;
     boolean left;
     Timer t;

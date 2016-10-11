@@ -1,4 +1,4 @@
-import java.awt.Rectangle;
+import java.awt.Rectangle;//
 import javax.swing.JComponent;
 import java.awt.Graphics;
 import java.awt.Graphics2D;

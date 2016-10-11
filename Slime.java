@@ -14,7 +14,7 @@ import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D.Double;
 import java.awt.geom.Ellipse2D;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
+import javax.swing.JFrame;//
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;

@@ -35,7 +35,7 @@ public class Block extends JComponent //see alien class for comment code
     public Block(int x, int y)
     {
         posX = x;
-        posY = y;
+        posY = y;//
         int z= 0;
 
          try {// allows you to test a block of code and then check for errors(as image imports usually throw and error)
